@@ -1,2 +1,8 @@
 vendor
 .phpcomplete_extended
+
+public/vendor
+
+private/*
+
+*.swp
