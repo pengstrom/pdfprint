@@ -18,7 +18,7 @@
  */
 
 // The main project directory relative to this document
-define(PROJECT_ROOT, '../');
+define('PROJECT_ROOT', '../');
 
 require "../vendor/autoload.php";
 
