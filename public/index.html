@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Pelles PDF-printer</title>
+
+    <link rel="stylesheet" href="./vendor/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="assets/style/main.css" type="text/css" media="all" />
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="page-header">
+            <h1>Pelles PDF-printer</h1>
+            <p class="lead">Ladda upp filer för att skriva ut dem på p2404!</p>
+          </div>
+
+          <form action="pdfprint.php" enctype="multipart/form-data" method="POST">
+            <div class="row">
+              <div class="col-md-10">
+                <input type="file" name="document" id="document" /> 
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-primary btn-lg btn-block submit-button" type="submit" value="Continue →">Ladda upp</button>
+              </div>
+            </div>
+          </form>
+
+
+
+        </div> 
+      </div> 
+    </div>
+  </body>
+</html>
