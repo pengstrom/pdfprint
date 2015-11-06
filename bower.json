@@ -1,0 +1,6 @@
+{
+    "name": "PDF Printer",
+    "dependencies": {
+        "bootstrap": "^3"
+    }
+}
