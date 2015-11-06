@@ -105,22 +105,25 @@ if ($result->isValid()) {
         type="text/css"
         media="all"
     />
-
     <link
         rel="stylesheet"
         href="assets/style/main.css"
         type="text/css"
         media="all"
     />
+    <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+    >
     
 </head>
 <body>
     <div class="container">
         <div class="page-header">
-            <h1><?=$title?></h1>
+            <h1><span class="fa fa-file-pdf-o"></span> <?=$title?></h1>
             <p class="lead"><?=$message?></p>
         </div>
-        <a href="/" class="btn btn-default">Tillbaka</a>
+        <a href="/" class="btn btn-default"><span class="fa fa-repeat"i></span> Tillbaka</a>
     </div>
 </body>
 </html>
