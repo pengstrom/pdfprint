@@ -3,6 +3,9 @@ vendor
 
 public/vendor
 
+composer.lock
+
 private/*
+uploads/*
 
 *.swp
