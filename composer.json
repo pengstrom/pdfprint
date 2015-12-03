@@ -1,8 +1,8 @@
 {
     "require": {
-        "pengstrom/pdfprint-lib": "^1.0",
         "raveren/kint": "^1.0",
-        "symfony/yaml": "^2.7"
+        "symfony/yaml": "^2.7",
+        "pengstrom/pdfprint-lib": "^1.1"
     },
     "scripts": {
         "post-install-cmd": [

@@ -1,12 +1,31 @@
 body {
   padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
-.submit-button {
-  margin-top: 2rem;
+.jumbotron-pane {
+  background-color: #444;
+  width: 100%
 }
+
+.no-horizontal-padding {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.nudge-down {
+  padding-top: 1rem;
+}
+
+/*
+.input-file {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+*idigt 
 
 .pelle {
   font-weight: 600;
 }
+
 

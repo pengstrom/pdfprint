@@ -1,8 +1,8 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-  echo 'Go away.';
-  exit;
+    echo 'Go away.';
+    exit;
 }
 
 
@@ -17,7 +17,7 @@ use Symfony\Component\Yaml\Parser;
 
 $yaml = new Parser();
 $config = $yaml->parse(
-  file_get_contents(PDFPRINT_ROOT . DIRECTORY_SEPARATOR . 'siteconfig.yml')
+    file_get_contents(PDFPRINT_ROOT . DIRECTORY_SEPARATOR . 'siteconfig.yml')
 );
 
 $uploadFolder = PDFPRINT_ROOT . DIRECTORY_SEPARATOR . $config['uploadFolder'];
@@ -26,36 +26,10 @@ $sshUsername = $config['ssh']['username'];
 $sshRsaKey = PDFPRINT_ROOT . DIRECTORY_SEPARATOR . $config['ssh']['rsaKeyLocation'];
 $baseurl = $config['baseurl'];
 
-$jsonfile = '../printer-options.json';
-
-$printer = $_POST['printer'];
-$legalOptions = (array) json_decode(file_get_contents($jsonfile));
-$legalOptions = (array) $legalOptions[$printer];
 
 $file = $_FILES['document'];
 
-$options = $_POST;
-
-$username = $_POST['username'];
-$password = $_POST['password'];
-
-// Remove non-options
-unset($options['printer']);
-unset($options['username']);
-unset($options['password']);
-
-// Validate printer options in POST
-foreach ($options as $optionName => $data) {
-    if (!in_array($optionName, array_keys($legalOptions))) {
-      exit('Invalid request');
-    }
-
-    $legalValues = (array) $legalOptions[$optionName];
-    $legalValues = (array) $legalValues['values'];
-    if (!in_array($data, $legalValues)) {
-      exit('Invalid request');
-    }
-}
+d($_POST);
 
 $absStorage = realpath($uploadFolder);
 $uploader = new PdfUploadHandler($absStorage);
@@ -68,7 +42,25 @@ if ($result['message']) {
 
 } else if ($filename = $result['filename']) {
 
+    $options =
+    ['printer' => 'pr2402', 'options' =>
+        ['ColorModel' => 'Gray', 'Duplex' => 'None']];
+
+    if ($_POST['color']) {
+      $options['options']['ColorModel'] = 'CMYK';
+    }
+
+    if ($_POST['duplex']) {
+      $options['options']['Duplex'] = 'DuplexNoTumble';
+    }
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    //$key = file_get_contents($sshRsaKey);
     $printer = new PrintSSH($sshServer, $username, $password);
+
+    //$printer->printFile($filename, $options);
 
     $title = '<span class="fa fa-print"></span> Utskriften lyckades!';
     $message = 'Utskriften kan nu hämtas.';
@@ -113,3 +105,5 @@ if ($result['message']) {
       </div>
   </body>
 </html>
+
+
