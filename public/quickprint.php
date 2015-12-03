@@ -60,7 +60,7 @@ if ($result['message']) {
     //$key = file_get_contents($sshRsaKey);
     $printer = new PrintSSH($sshServer, $username, $password);
 
-    //$printer->printFile($filename, $options);
+    $printer->printFile($filename, 'pr2402', $options, true);
 
     $title = '<span class="fa fa-print"></span> Utskriften lyckades!';
     $message = 'Utskriften kan nu hämtas.';

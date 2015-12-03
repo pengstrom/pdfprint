@@ -70,6 +70,8 @@ if ($result['message']) {
 
     $printer = new PrintSSH($sshServer, $username, $password);
 
+    $printer->printFile($filename, $printer, $options, true);
+
     $title = '<span class="fa fa-print"></span> Utskriften lyckades!';
     $message = 'Utskriften kan nu hämtas.';
 }
