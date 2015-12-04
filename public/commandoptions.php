@@ -47,7 +47,6 @@
                      echo '<div class="col-sm-5">';
                        echo '<select class="form-control" name="' . $optionName . '" id="' . $optionName. '">';
                          foreach ($options as $option) {
-                         d($option);
                          if ($option === $default) {
                          echo '<option selected="selected">' . $option . '</option>';
                          } else {

@@ -29,7 +29,6 @@ $baseurl = $config['baseurl'];
 
 $file = $_FILES['document'];
 
-d($_POST);
 
 $absStorage = realpath($uploadFolder);
 $uploader = new PdfUploadHandler($absStorage);
