@@ -60,8 +60,10 @@
                     </form>
                   </div>
                 </div>
+
               </div>
             </div>
+                <p class="lead">Du kan också generara kommandon för skrivarna <a href="/commandprinter.php" target="">här.</a></p>
           </div>
 
           <div class="col-sm-8 col-sm-offset-2">
