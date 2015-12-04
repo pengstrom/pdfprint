@@ -28,9 +28,9 @@ $baseurl = $config['baseurl'];
 
 $jsonfile = '../printer-options.json';
 
-$printer = $_POST['printer'];
+$printerName = $_POST['printer'];
 $legalOptions = (array) json_decode(file_get_contents($jsonfile));
-$legalOptions = (array) $legalOptions[$printer];
+$legalOptions = (array) $legalOptions[$printerName];
 
 $file = $_FILES['document'];
 
@@ -70,7 +70,7 @@ if ($result['message']) {
 
     $printer = new PrintSSH($sshServer, $username, $password);
 
-    $printer->printFile($filename, $printer, $options, true);
+    $printer->printFile($filename, $printerName, $options, true);
 
     $title = '<span class="fa fa-print"></span> Utskriften lyckades!';
     $message = 'Utskriften kan nu hämtas.';
