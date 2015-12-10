@@ -120,6 +120,9 @@ if (!$errors) {
         
         <a class="btn btn-default pull-right" href="/"><span class="fa fa-refresh"></span> Tillbaka</a>
       </div>
+    <?php
+      require 'foot.php';
+    ?>
   </body>
 </html>
 

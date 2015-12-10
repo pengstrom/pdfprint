@@ -1,6 +1,7 @@
-body {
+html, body {
   padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-bottom: none;
+  margin-bottom: none;
 }
 
 .jumbotron-pane {
@@ -19,4 +20,12 @@ body {
 
 .copies {
   width: 20%;
+}
+
+.footer {
+  background-color: #EEE;
+  color: #666;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
 }

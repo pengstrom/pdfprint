@@ -58,5 +58,8 @@
         </div>
       </div>
     </div>
+    <?php
+      require 'foot.php';
+    ?>
   </body>
 </html>
