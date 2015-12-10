@@ -44,16 +44,14 @@ foreach ($results as $result) {
 }
 
 if (!$errors) {
-    $options =
-    ['printer' => 'pr2402', 'options' =>
-        ['ColorModel' => 'Gray', 'Duplex' => 'None']];
+    $options = ['ColorModel' => 'Gray', 'Duplex' => 'None'];
 
     if ($_POST['color']) {
-      $options['options']['ColorModel'] = 'CMYK';
+      $options['ColorModel'] = 'CMYK';
     }
 
     if ($_POST['duplex']) {
-      $options['options']['Duplex'] = 'DuplexNoTumble';
+      $options['Duplex'] = 'DuplexNoTumble';
     }
 
     $username = $_POST['username'];
