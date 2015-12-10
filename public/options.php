@@ -43,9 +43,12 @@
                 <div class="form-group">
                   <input placeholder="Lösenord" class="form-control" type="password" name="password" id="password" value="" />
                 </div>
+                <div class="form-group">
+                  <input placeholder="Kopior" class="form-control copies" type="text" name="copies" id="copies" value="" />
+                </div>
                   </div>
                 <div class="form-group">
-                  <input type="file" name="document" id="document"/>
+                  <input type="file" name="documents[]" id="document" multiple="multiple"/>
                 </div>
                 </div>
 

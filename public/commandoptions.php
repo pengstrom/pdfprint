@@ -31,6 +31,20 @@
 
             <input type="hidden" name="printer" id="printer" value="<?=$printer?>" />
 
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Dokument</strong></h3>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label class="control-label col-sm-6" for="copies">Antal kopior</label>
+                  <div class="col-sm-5">
+                    <input class="form-control" type="text" name="copies" id="copies" value="1" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">Inställningar för <strong><?=$printer?></strong></h3>

@@ -45,7 +45,15 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <input class="input-file" type="file" name="document" id="document" /> 
+                        <input
+                            class="form-control copies"
+                            type="text"
+                            id="copies"
+                            name="copies"
+                            placeholder="Kopior" />
+                      </div>
+                      <div class="form-group">
+                        <input class="input-file" type="file" name="documents[]" id="document" multiple="multiple" /> 
                       </div>
                       <div class="form-group">
                         <div class="col-sm-8 no-horizontal-padding">

@@ -32,10 +32,13 @@ $printer = $_POST['printer'];
 $legalOptions = (array) json_decode(file_get_contents($jsonfile));
 $legalOptions = (array) $legalOptions[$printer];
 
+$copies = $_POST['copies'];
+
 $options = $_POST;
 
 // Remove non-options
 unset($options['printer']);
+unset($options['copies']);
 
 // Get non-default options
 foreach ($options as $optionName => $optionValue) {
@@ -45,7 +48,7 @@ foreach ($options as $optionName => $optionValue) {
 }
 
 // Construct command
-$command = 'lpr -P ' . $printer;
+$command = 'lpr -P ' . $printer . ' -# ' . $copies;
 foreach ($options as $optionName => $optionValue) {
     $option = ' -o ' . $optionName . '=' . $optionValue;
     $command = $command . $option;

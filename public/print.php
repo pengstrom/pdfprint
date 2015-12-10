@@ -32,15 +32,17 @@ $printerName = $_POST['printer'];
 $legalOptions = (array) json_decode(file_get_contents($jsonfile));
 $legalOptions = (array) $legalOptions[$printerName];
 
-$file = $_FILES['document'];
+$files = $_FILES['documents'];
 
 $options = $_POST;
 
 $username = $_POST['username'];
 $password = $_POST['password'];
+$copies = (int) $_POST['copies'];
 
 // Remove non-options
 unset($options['printer']);
+unset($options['copies']);
 unset($options['username']);
 unset($options['password']);
 
@@ -59,21 +61,31 @@ foreach ($options as $optionName => $data) {
 
 $absStorage = realpath($uploadFolder);
 $uploader = new PdfUploadHandler($absStorage);
-$result = $uploader->upload($file);
+$results = $uploader->upload($files);
 
-if ($result['message']) {
+$errors = [];
 
-    $title = '<span class="fa fa-exclamation-triangle"></span> Det blev fel :(';
-    $message = 'Error: ' . $result['message'];
+foreach ($results as $result) {
 
-} else if ($filename = $result['filename']) {
+    if ($result['message']) {
+        $errors[] = $result;
+    }
+
+}
+
+if (!$errors) {
 
     $printer = new PrintSSH($sshServer, $username, $password);
 
-    $printer->printFile($filename, $printerName, $options, true);
+    if ($copies < 1) {
+        $copies = 1;
+    }
 
-    $title = '<span class="fa fa-print"></span> Utskriften lyckades!';
-    $message = 'Utskriften kan nu hämtas.';
+    foreach ($results as $result) {
+        $filename = $result['filename'];
+        $printer->printFile($filename, 'pr2402', $options, $copies, true);
+    }
+
 }
 
 ?>
@@ -107,11 +119,24 @@ if ($result['message']) {
   <body>
       <div class="container">
         <div class="page-header">
-            <h1><?=$title?></h1>
-            <p class="lead"><?=$message?></p>
+            <?php if ($errors): ?>
+                <h1><span class="fa fa-exclamation-triangle"></span> Det blev fel :(</h1>
+                <p class="lead">Det förekom fel, se nedan.</p>
+            <?php else: ?>
+                <h1><span class="fa fa-print"></span> Utskriften lyckades!</h1>
+                <p class="lead">Utskriften kan hämtas på pr2404!</p>
+            <?php endif; ?>
         </div>          
         
-        <a class="btn btn-default pull-right" href="/"><span class="fa fa-refresh"></span> Tillbaka</a>
+        <?php if ($errors): ?>
+           <ul>
+             <?php foreach($errors as $error): ?>
+               <li><?=$error['original']?> :: <strong>Error</strong> : <em><?=$error['message']?></em></li>
+             <?php endforeach; ?>
+           </ul> 
+        <?php endif; ?>
+
+        <a class="btn btn-default pull-right" href="/printer.php"><span class="fa fa-refresh"></span> Tillbaka</a>
       </div>
   </body>
 </html>
