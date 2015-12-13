@@ -66,7 +66,9 @@ if (!$errors) {
 
     foreach ($results as $result) {
         $filename = $result['filename'];
-        $printer->printFile($filename, 'pr2402', $options, $copies, true);
+        if ($filename) {
+            $printer->printFile($filename, 'pr2402', $options, $copies, true);
+        }
     }
 }
 
