@@ -76,7 +76,7 @@
               </div> 
             </div>
             <button type="submit" class="btn btn-primary btn-lg pull-right">
-              <span class="fa fa-print"></span> Skriv ut
+              <span class="fa fa-terminal"></span> Generera kommando
             </button>
           </form>
         </div>

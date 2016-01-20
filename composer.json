@@ -1,8 +1,14 @@
 {
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "../pdfprint-lib"
+        }
+    ],
     "require": {
         "raveren/kint": "^1.0",
         "symfony/yaml": "^2.7",
-        "pengstrom/pdfprint-lib": "^1.3"
+        "pengstrom/pdfprint-lib": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
