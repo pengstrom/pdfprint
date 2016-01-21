@@ -1,10 +1,4 @@
 {
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "../pdfprint-lib"
-        }
-    ],
     "require": {
         "raveren/kint": "^1.0",
         "symfony/yaml": "^2.7",
