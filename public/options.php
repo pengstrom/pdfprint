@@ -19,7 +19,7 @@
   <body>
     <div class="container">
       <div class="page-header">
-        <h1> <span class="fa fa-cog"></span> Välj fil och inställningar</h1>
+        <h1> <span class="fa fa-cog"></span> Välj filer och inställningar</h1>
         <p class="lead">
         De förvalda inställningarna är standardalternativen för den här skrivaren. Ändra bara inställningar om du vet vad de gör!
         </p>

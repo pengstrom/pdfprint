@@ -86,7 +86,7 @@ foreach ($options as $optionName => $optionValue) {
   <body>
       <div class="container">
         <div class="page-header">
-            <h1><span class="fa fa-terminal"></span> Printer-kommando</h1>
+            <h1><span class="fa fa-terminal"></span> Skrivar-kommando</h1>
             <p class="lead">Ditt kommando är klart!</p>
         </div>          
 

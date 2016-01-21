@@ -51,7 +51,7 @@
             </div>
 
               <button type="submit" class="btn btn-lg btn-primary pull-right">
-                Välj fil och inställningar <span class="fa fa-arrow-circle-right fa-lg"></span>
+                Välj filer och inställningar <span class="fa fa-arrow-circle-right fa-lg"></span>
               </button>
           </form>
 
