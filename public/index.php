@@ -9,7 +9,7 @@
 
           <div class="page-header">
             <h1><span class="fa fa-file-pdf-o"></span> <span class="pelle">Pelles</span> PDF-printer</h1>
-            <p class="lead">Skriv enkelt ut på ITC</p>
+            <p class="lead">Skriv ut enkelt på ITC</p>
           </div>
 
           <div class="jumbotron">
