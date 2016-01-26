@@ -38,7 +38,7 @@
                     foreach ($printers as $printer) {
                         $printer = htmlspecialchars($printer);
                         if ($printer == 'pr2402') {
-                          echo '<option default>' . $printer . '</option>';
+                          echo '<option selected>' . $printer . '</option>';
                         } else {
                           echo '<option>' . $printer . '</option>';
                         }

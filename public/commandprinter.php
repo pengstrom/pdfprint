@@ -38,7 +38,7 @@
                     foreach ($printers as $printer) {
                         $printer = htmlspecialchars($printer);
                         if ($printer == 'pr2402') {
-                          echo '<option default>' . $printer . '</option>';
+                          echo '<option selected>' . $printer . '</option>';
                         } else {
                           echo '<option>' . $printer . '</option>';
                         }
@@ -51,7 +51,7 @@
             </div>
 
               <button type="submit" class="btn btn-lg btn-primary pull-right">
-                Välj fil och inställningar <span class="fa fa-arrow-circle-right fa-lg"></span>
+                Välj inställningar <span class="fa fa-arrow-circle-right fa-lg"></span>
               </button>
           </form>
 

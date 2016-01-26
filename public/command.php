@@ -32,7 +32,12 @@ $printer = $_POST['printer'];
 $legalOptions = (array) json_decode(file_get_contents($jsonfile));
 $legalOptions = (array) $legalOptions[$printer];
 
-$copies = $_POST['copies'];
+$copies = (int) $_POST['copies'];
+if ($copies <= 1) {
+    $copies = "";
+} else {
+    $copies = " -# $copies";
+}
 
 $options = $_POST;
 
@@ -48,7 +53,7 @@ foreach ($options as $optionName => $optionValue) {
 }
 
 // Construct command
-$command = 'lpr -P ' . $printer . ' -# ' . $copies;
+$command = 'lpr -P ' . $printer . $copies;
 foreach ($options as $optionName => $optionValue) {
     $option = ' -o ' . $optionName . '=' . $optionValue;
     $command = $command . $option;
@@ -92,7 +97,7 @@ foreach ($options as $optionName => $optionValue) {
 
         <pre><?=$command?></pre>
         
-        <a class="btn btn-default pull-right" href="/"><span class="fa fa-refresh"></span> Tillbaka</a>
+        <a class="btn btn-default pull-right" href="/"><span class="fa fa-refresh"></span> Tillbaka till förstasidan</a>
       </div>
     <?php
       require 'foot.php';

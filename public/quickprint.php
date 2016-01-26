@@ -119,12 +119,12 @@ if (!$errors) {
              <?php endforeach; ?>
            </ul> 
         <?php endif; ?>
-        
-        <a class="btn btn-default pull-right" href="/"><span class="fa fa-refresh"></span> Tillbaka</a>
+
+        <a class="btn btn-default pull-right" href="/"><span class="fa fa-refresh"></span> Tillbaka till förstasidan</a>
       </div>
-    <?php
-      require 'foot.php';
-    ?>
+<?php
+require 'foot.php';
+?>
   </body>
 </html>
 
