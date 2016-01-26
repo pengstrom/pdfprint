@@ -53,13 +53,10 @@ argument
         ColorMode: 'CMYK',
         ...
     },
-    copies: 2,
     username: '...',
     password: '...',
-    files: [
-        { ... },
-        ...
-    ]
+    copies [ 2, ... ],
+    files: { ... },
 }
 
 returns
