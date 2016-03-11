@@ -10,7 +10,7 @@ try {
 
     $printerOptions = (array) json_decode($content = file_get_contents($jsonfile));
     if ($content === false) {
-        throw new \RuntimeException("JSON file not found");
+        throw new \RuntimeException("Printer info file not found");
     }
     $printers = array_keys($printerOptions);
     sort($printers);
@@ -18,8 +18,8 @@ try {
     http_response_code(200);
     echo json_encode($printers);
 } catch (Exception $e) {
-    header("HTTP/1.1 500 OK");
-    echo json_encode([]);
+    http_response_code(500);
+    echo json_encode($e->getMessage());
 }
 
 ?>
