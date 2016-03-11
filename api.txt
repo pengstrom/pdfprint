@@ -1,0 +1,78 @@
+API spec
+
+
+printers.php
+
+returns
+200 [
+    'pr2404',
+    'pr2206',
+    ...
+]
+400/500 {
+    message: '...'
+}
+
+
+options.php
+
+argument
+{
+    printer: 'pr2402'
+}
+
+returns
+200 {
+    printer: 'pr2402',
+    options: {
+        Duplex: {
+            values: [
+                'None',
+                'DuplexNoTumble',
+                'DuplexTumble'
+            ],
+            default: 'DuplexNoTumble',
+            descripton: 'Duplex'
+        },
+        ColorMode: { ... },
+        ...
+    }
+}
+400/500 {
+    message: '...'
+}
+
+
+print.php
+
+argument
+{
+    printer: 'pr2402',
+    options: {
+        Duplex: 'Duplex',
+        ColorMode: 'CMYK',
+        ...
+    },
+    username: '...',
+    password: '...',
+    copies [ 2, ... ],
+    files: { ... },
+}
+
+returns
+200 {
+    printer: '...',
+    options { ... },
+    username: '...',
+    password: '...',
+    files: [ ... ]
+}
+
+400/500 {
+    printer: '...',
+    options { ... },
+    files: [ ... ],
+    username: '...',
+    message: '...'
+}
+

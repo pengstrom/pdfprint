@@ -1,7 +1,7 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    echo 'Go away.';
+    http_response_code(400);
     exit;
 }
 
@@ -22,9 +22,6 @@ $config = $yaml->parse(
 
 $uploadFolder = PDFPRINT_ROOT . DIRECTORY_SEPARATOR . $config['uploadFolder'];
 $sshServer = $config['ssh']['server'];
-$sshUsername = $config['ssh']['username'];
-$sshRsaKey = PDFPRINT_ROOT . DIRECTORY_SEPARATOR . $config['ssh']['rsaKeyLocation'];
-$baseurl = $config['baseurl'];
 
 $files = $_FILES['documents'];
 
@@ -47,11 +44,11 @@ if (!$errors) {
     $options = ['ColorModel' => 'Gray', 'Duplex' => 'None'];
 
     if ($_POST['color']) {
-      $options['ColorModel'] = 'CMYK';
+        $options['ColorModel'] = 'CMYK';
     }
 
     if ($_POST['duplex']) {
-      $options['Duplex'] = 'DuplexNoTumble';
+        $options['Duplex'] = 'DuplexNoTumble';
     }
 
     $username = $_POST['username'];
@@ -62,15 +59,20 @@ if (!$errors) {
         $copies = 1;
     }
 
-    $printer = new PrintSSH($sshServer, $username, $password);
+    try {
+        $printer = new PrintSSH($sshServer, $username, $password);
 
-    foreach ($results as $result) {
-        $filename = $result['filename'];
-        if ($filename) {
-            $printer->printFile($filename, 'pr2402', $options, $copies, true);
+        foreach ($results as $result) {
+            $filename = $result['filename'];
+            if ($filename) {
+                $printer->printFile($filename, 'pr2402', $options, $copies, true);
+            }
         }
+    } catch (Exception $e) {
+        $errors[] = ['message' => $e->getMessage()];
     }
 }
+
 
 ?>
 
