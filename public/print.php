@@ -126,7 +126,7 @@ if (!$errors) {
                 <p class="lead">Det förekom fel, se nedan.</p>
             <?php else: ?>
                 <h1><span class="fa fa-print"></span> Utskriften lyckades!</h1>
-                <p class="lead">Utskriften kan hämtas på pr2404!</p>
+                <p class="lead">Utskriften kan hämtas på <?=$printerName?>!</p>
             <?php endif; ?>
         </div>          
         
