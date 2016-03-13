@@ -22,7 +22,8 @@ $config = $yaml->parse(
 
 $uploadFolder = PDFPRINT_ROOT . DIRECTORY_SEPARATOR . $config['uploadFolder'];
 $sshServer = $config['ssh']['server'];
-$live = ($config['live'] === 'True');
+$live = $config['live'];
+$debug = $config['debug'];
 
 $files = $_FILES['documents'];
 
