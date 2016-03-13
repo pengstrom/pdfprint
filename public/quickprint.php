@@ -22,6 +22,7 @@ $config = $yaml->parse(
 
 $uploadFolder = PDFPRINT_ROOT . DIRECTORY_SEPARATOR . $config['uploadFolder'];
 $sshServer = $config['ssh']['server'];
+$live = ($config['live'] === 'True');
 
 $files = $_FILES['documents'];
 
@@ -65,7 +66,7 @@ if (!$errors) {
         foreach ($results as $result) {
             $filename = $result['filename'];
             if ($filename) {
-                $printer->printFile($filename, 'pr2402', $options, $copies, true);
+                $printer->printFile($filename, 'pr2402', $options, $copies, $live);
             }
         }
     } catch (Exception $e) {

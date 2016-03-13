@@ -22,9 +22,7 @@ $config = $yaml->parse(
 
 $uploadFolder = PDFPRINT_ROOT . DIRECTORY_SEPARATOR . $config['uploadFolder'];
 $sshServer = $config['ssh']['server'];
-$sshUsername = $config['ssh']['username'];
-$sshRsaKey = PDFPRINT_ROOT . DIRECTORY_SEPARATOR . $config['ssh']['rsaKeyLocation'];
-$baseurl = $config['baseurl'];
+$live = ($config['live'] === 'True');
 
 $jsonfile = '../printer-options.json';
 
@@ -85,7 +83,7 @@ if (!$errors) {
 
         $filename = $result['filename'];
         if ($filename) {
-            $printer->printFile($filename, 'pr2402', $options, $copies, true);
+            $printer->printFile($filename, $printerName, $options, $copies, $live);
         }
     }
 
