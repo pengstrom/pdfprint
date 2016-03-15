@@ -11,16 +11,8 @@ require PDFPRINT_ROOT . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 use PEngstrom\PdfPrintLib\PdfUploadHandler;
 use PEngstrom\PdfPrintLib\PrintSSH;
-use Symfony\Component\Yaml\Parser;
 
-
-$yaml = new Parser();
-$config = $yaml->parse(
-  file_get_contents(PDFPRINT_ROOT . DIRECTORY_SEPARATOR . 'siteconfig.yml')
-);
-
-$uploadFolder = PDFPRINT_ROOT . DIRECTORY_SEPARATOR . $config['uploadFolder'];
-$sshServer = $config['ssh']['server'];
+require '../yaml.php';
 
 try {
     if (!$printer = $_POST['printer']) {
@@ -45,7 +37,7 @@ try {
 
     if (!$files = $_FILES['documents']) {
         throw new \RuntimeException("You must specify the files");
-    } elseif (count($copies) !== count($files)) {
+    } elseif (count($copies) !== count($files['name'])) {
         throw new \RuntimeException(
             "You need to supply the number of copies for each file");
     }
@@ -54,23 +46,23 @@ try {
     $contents = file_get_contents($jsonfile);
     $printerData = json_decode($contents, true);
 
-    if ($contents === false) {
+    if (!$contents) {
         error_log("Printer data not found at $jsonfile");
         http_response_code(500);
-        exit("Internal server error");
+        exit;
     }
 
-    if (array_key_exists($printer, $printerData) === false) {
+    if (!array_key_exists($printer, $printerData)) {
         throw new \RuntimeException("Printer $printer not found");
     }
 
-    $availableOptions = (array) $printerData[$printer];
+    $availableOptions = $printerData[$printer];
 
     foreach ($options as $optionName => $optionValue) {
         if (!array_key_exists($optionName, $availableOptions)) {
             throw new \RuntimeException(
                 "Option $optionName not available for printer $printer");
-        } elseif (!in_array($optionValue, $availableOptions[$optionName])) {
+        } elseif (!in_array($optionValue, $availableOptions[$optionName]['values'])) {
             throw new \RuntimeException(
                 "Value $optionValue not available for
                 option $optionName on printer $printer");
@@ -78,10 +70,10 @@ try {
     }
 
     $uploadDir = realpath($uploadFolder);
-    if ($uploadDir === false) {
+    if (!$uploadDir) {
         error_log("Could not establish uplad folder $uploadFolder");
         http_response_code(500);
-        exit("Internal server error");
+        exit;
     }
 
     $printer = new PrintSSH($sshServer, $username, $password);
@@ -102,11 +94,11 @@ try {
         exit;
     }
 
-    for ($i=0; $i < count($files); $i++) {
+    for ($i=0; $i < count($copies); $i++) {
         $result = $results[$i];
         $filename = $result['filename'];
         $copy = $copies[$i];
-        $printer->printFile($filename, $printer, $options, $copy, true);
+        $printer->printFile($filename, $printer, $options, $copy, $live);
     }
 
     $response = $_POST;

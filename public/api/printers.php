@@ -8,10 +8,15 @@ try {
 
     $jsonfile = '../../printer-options.json';
 
-    $printerOptions = (array) json_decode($content = file_get_contents($jsonfile));
-    if ($content === false) {
+    $printerOptions = json_decode($contents = file_get_contents($jsonfile), true);
+
+    if ($contents === false) {
         throw new \RuntimeException("Printer info file not found");
     }
+    if ($printerOptions === Null) {
+        throw new \RuntimeException("Printer file $printer contains invalid json");
+    }
+
     $printers = array_keys($printerOptions);
     sort($printers);
 
