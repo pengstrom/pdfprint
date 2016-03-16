@@ -28,7 +28,7 @@
                         <input class="form-control" type="text" name="username" id="username" value="" placeholder="Användarnamn"/>
                       </div>
                       <div class="form-group">
-                        <input class="form-control" type="password" name="password" id="password" value="" placeholder="Lösenord"/>
+                        <input class="form-control" type="password" name="password" id="password" value="" placeholder="Lösenord A"/>
                       </div>
                       <div class="form-group">
                         <div class="checkbox">

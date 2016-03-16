@@ -41,7 +41,7 @@
                   <input placeholder="Användarnamn" class="form-control" type="text" name="username" id="username" value="" />
                 </div>
                 <div class="form-group">
-                  <input placeholder="Lösenord" class="form-control" type="password" name="password" id="password" value="" />
+                  <input placeholder="Lösenord A" class="form-control" type="password" name="password" id="password" value="" />
                 </div>
                 <div class="form-group">
                   <input placeholder="Kopior" class="form-control copies" type="text" name="copies" id="copies" value="" />
