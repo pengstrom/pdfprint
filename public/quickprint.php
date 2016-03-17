@@ -12,18 +12,8 @@ require PDFPRINT_ROOT . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 use PEngstrom\PdfPrintLib\PdfUploadHandler;
 use PEngstrom\PdfPrintLib\PrintSSH;
-use Symfony\Component\Yaml\Parser;
 
-
-$yaml = new Parser();
-$config = $yaml->parse(
-    file_get_contents(PDFPRINT_ROOT . DIRECTORY_SEPARATOR . 'siteconfig.yml')
-);
-
-$uploadFolder = PDFPRINT_ROOT . DIRECTORY_SEPARATOR . $config['uploadFolder'];
-$sshServer = $config['ssh']['server'];
-$live = $config['live'];
-$debug = $config['debug'];
+require 'yaml.php';
 
 $files = $_FILES['documents'];
 
@@ -45,11 +35,11 @@ foreach ($results as $result) {
 if (!$errors) {
     $options = ['ColorModel' => 'Gray', 'Duplex' => 'None'];
 
-    if ($_POST['color']) {
+    if ($_POST['color'] === "on") {
         $options['ColorModel'] = 'CMYK';
     }
 
-    if ($_POST['duplex']) {
+    if ($_POST['duplex'] === "on") {
         $options['Duplex'] = 'DuplexNoTumble';
     }
 
