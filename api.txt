@@ -3,19 +3,26 @@ API spec
 
 printers.php
 
+GET
 returns
-200 [
+200 {
+    error: {},
+    payload: [
     'pr2404',
     'pr2206',
     ...
-]
+    ]
+}
+
 400/500 {
-    message: '...'
+    error: '...',
+    payload: {}
 }
 
 
 options.php
 
+POST
 argument
 {
     printer: 'pr2402'
@@ -23,28 +30,34 @@ argument
 
 returns
 200 {
-    printer: 'pr2402',
-    options: {
-        Duplex: {
-            values: [
-                'None',
-                'DuplexNoTumble',
-                'DuplexTumble'
-            ],
-            default: 'DuplexNoTumble',
-            descripton: 'Duplex'
-        },
-        ColorMode: { ... },
-        ...
+    error: {},
+    payload: {
+        printer: 'pr2402',
+        options: {
+            Duplex: {
+                values: [
+                    'None',
+                    'DuplexNoTumble',
+                    'DuplexTumble'
+                ],
+                default: 'DuplexNoTumble',
+                descripton: 'Duplex'
+            },
+            ColorMode: { ... },
+            ...
+        }
     }
 }
+
 400/500 {
-    message: '...'
+    error: '...',
+    payload: {}
 }
 
 
 print.php
 
+POST
 argument
 {
     printer: 'pr2402',
@@ -61,18 +74,12 @@ argument
 
 returns
 200 {
-    printer: '...',
-    options { ... },
-    username: '...',
-    password: '...',
-    files: [ ... ]
+    error: {},
+    payload: argument
 }
 
 400/500 {
-    printer: '...',
-    options { ... },
-    files: [ ... ],
-    username: '...',
-    message: '...'
+    error: '...',
+    payload: argument
 }
 

@@ -90,7 +90,7 @@ try {
 
     if (count($errors) !== 0) {
         http_response_code(400);
-        echo json_encode($errors);
+        echo json_encode(['error' => $errors, 'payload' => []]);
         exit;
     }
 
@@ -104,12 +104,12 @@ try {
     $response = $_POST;
     http_response_code(200);
 
-    echo json_encode($response);
+    echo json_encode(['error' => [], 'payload' => $response]);
     exit;
 
 } catch (Exception $e) {
     http_response_code(400);
-    echo json_encode($e->getMessage());
+    echo json_encode(['error' => $e->getMessage(), 'payload' => []]);
     exit;
 } 
 

@@ -1,0 +1,14 @@
+baseurl: 'localhost:8080/'
+vendor:
+    php: 'vendor'
+    bower: 'public/vendor'
+
+ssh:
+    server: 'celsius.it.uu.se'
+    username: 'peen0572'
+    rsaKeyLocation: 'private/id_rsa'
+
+uploadFolder: 'uploads'
+
+live: false
+debug: true

@@ -13,7 +13,7 @@ try {
     if ($contents === false) {
         throw new \RuntimeException("Printer info file not found");
     }
-    if ($printerOptions === Null) {
+    if ($printerOptions === null) {
         throw new \RuntimeException("Printer file $printer contains invalid json");
     }
 
@@ -21,10 +21,10 @@ try {
     sort($printers);
 
     http_response_code(200);
-    echo json_encode($printers);
+    echo json_encode([ 'errors' => [], 'payload' => $printers]);
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode($e->getMessage());
+    echo json_encode([ 'errors' => [$e->getMessage()], 'payload' => []]);
 }
 
 ?>
