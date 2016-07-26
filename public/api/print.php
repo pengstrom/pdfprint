@@ -1,9 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: *");
-header("Content-Type: application/json");
-
+require '../cors.php';
 
 define('PDFPRINT_ROOT', realpath('../../'));
 
@@ -15,6 +12,8 @@ use PEngstrom\PdfPrintLib\PrintSSH;
 require '../yaml.php';
 
 try {
+
+    $errorcode = 400;
     if (!$printer = $_POST['printer']) {
         throw new \RuntimeException("You must specify a printer");
     }
@@ -47,9 +46,8 @@ try {
     $printerData = json_decode($contents, true);
 
     if (!$contents) {
-        error_log("Printer data not found at $jsonfile");
-        http_response_code(500);
-        exit;
+        $errorcode = 500;
+        \RuntimeException("Printer data not found at $jsonfile");
     }
 
     if (!array_key_exists($printer, $printerData)) {
@@ -64,16 +62,14 @@ try {
                 "Option $optionName not available for printer $printer");
         } elseif (!in_array($optionValue, $availableOptions[$optionName]['values'])) {
             throw new \RuntimeException(
-                "Value $optionValue not available for
-                option $optionName on printer $printer");
+                "Value $optionValue not available for option $optionName on printer $printer");
         }
     }
 
     $uploadDir = realpath($uploadFolder);
     if (!$uploadDir) {
-        error_log("Could not establish uplad folder $uploadFolder");
-        http_response_code(500);
-        exit;
+        $errorcode = 500;
+        \RuntimeException("Could not establish uplad folder $uploadFolder");
     }
 
     $printer = new PrintSSH($sshServer, $username, $password);
@@ -90,7 +86,8 @@ try {
 
     if (count($errors) !== 0) {
         http_response_code(400);
-        echo json_encode(['error' => $errors, 'payload' => []]);
+        array_map("error_log", $errors);
+        echo json_encode(['errors' => $errors, 'payload' => []]);
         exit;
     }
 
@@ -104,12 +101,13 @@ try {
     $response = $_POST;
     http_response_code(200);
 
-    echo json_encode(['error' => [], 'payload' => $response]);
+    echo json_encode(['errors' => [], 'payload' => $response]);
     exit;
 
 } catch (Exception $e) {
-    http_response_code(400);
-    echo json_encode(['error' => $e->getMessage(), 'payload' => []]);
+    http_response_code($errorcode);
+    error_log($e->getMessage());
+    echo json_encode(['errors' => $e->getMessage(), 'payload' => []]);
     exit;
 } 
 

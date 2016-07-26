@@ -1,8 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: *");
-header("Content-Type: application/json");
+require '../cors.php';
 
 try {
 
@@ -22,7 +20,9 @@ try {
 
     http_response_code(200);
     echo json_encode([ 'errors' => [], 'payload' => $printers]);
+
 } catch (Exception $e) {
+    error_log($e->getMessage());
     http_response_code(500);
     echo json_encode([ 'errors' => [$e->getMessage()], 'payload' => []]);
 }
