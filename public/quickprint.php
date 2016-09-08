@@ -15,14 +15,18 @@ use PEngstrom\PdfPrintLib\PrintSSH;
 
 require 'yaml.php';
 
-$files = $_FILES['documents'];
+$errors = [];
+
+if (isset($_FILES['documents']) === true) {
+    $file = $_FILES['documents'];
+} else {
+    $errors[] = ['message' => 'No file uploaded!'];
+}
 
 $absStorage = realpath($uploadFolder);
 $uploader = new PdfUploadHandler($absStorage);
 
 $results = $uploader->upload($files);
-
-$errors = [];
 
 foreach ($results as $result) {
 
