@@ -4,7 +4,7 @@ vendor:
     bower: 'public/vendor'
 
 ssh:
-    server: 'celsius.it.uu.se'
+    server: 'tussilago.it.uu.se'
     username: 'peen0572'
     rsaKeyLocation: 'private/id_rsa'
 
