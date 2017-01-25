@@ -18,7 +18,7 @@ require 'yaml.php';
 $errors = [];
 
 if (isset($_FILES['documents']) === true) {
-    $file = $_FILES['documents'];
+    $files = $_FILES['documents'];
 } else {
     $errors[] = ['message' => 'No file uploaded!'];
 }
